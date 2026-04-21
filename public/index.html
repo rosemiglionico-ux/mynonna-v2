@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>MyNonna — Cook with Heart</title>
+  <meta name="description" content="MyNonna — Generational, Interactive, and Handsfree cooking with your family's recipes and a personalized Nonna guide." />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+<div id="app-wrapper">
+
+  <!-- ══════════════════════════════════════════════
+       INTRO SLIDES
+  ══════════════════════════════════════════════ -->
+  <div id="screen-intro" class="screen active">
+    <div class="slides-wrapper">
+      <div class="slides-track" id="slides-track">
+
+        <!-- Slide 1: Welcome -->
+        <div class="slide" data-slide="0">
+          <div class="slide-emoji slide-anim-pulse">🍝</div>
+          <h1 class="slide-title">Welcome to MyNonna</h1>
+          <p class="slide-text">Your family's recipes, traditions, and stories — living in one beautiful place.</p>
+        </div>
+
+        <!-- Slide 2: Snap a Recipe -->
+        <div class="slide" data-slide="1">
+          <div class="slide-emoji" style="animation: floatBob 2.5s ease-in-out infinite;">📸</div>
+          <h1 class="slide-title">Snap a Recipe</h1>
+          <p class="slide-text">Take a photo of any handwritten or printed recipe card — our AI reads it instantly.</p>
+        </div>
+
+        <!-- Slide 3: Cook with your Nonna -->
+        <div class="slide" data-slide="2">
+          <div class="slide-emoji" style="animation: floatBob 3.5s ease-in-out infinite 0.5s;">👵🏻</div>
+          <h1 class="slide-title">Cook with Your Nonna</h1>
+          <p class="slide-text">Create a personalized Nonna who guides you step by step, answers questions, and makes cooking feel like home.</p>
+        </div>
+
+        <!-- Slide 4: Family -->
+        <div class="slide" data-slide="3">
+          <div class="slide-emoji" style="animation: floatBob 2.8s ease-in-out infinite 0.3s;">👨‍👩‍👧‍👦</div>
+          <h1 class="slide-title">Keep It in the Family</h1>
+          <p class="slide-text">Share recipes and Nonnas with your family in a private circle. Cook together, even miles apart.</p>
+        </div>
+
+        <!-- Slide 5: Auth Landing -->
+        <div class="slide auth-slide" data-slide="4">
+          <div class="auth-slide-hero">
+            <p class="auth-hero-text">Enjoy A Culinary Experience That Is:<br><span>Generational</span>, <span>Interactive</span>, &amp; <span>Handsfree</span>.</p>
+            <div class="auth-logo">
+              <div class="auth-logo-icon">❤️</div>
+              MyNonna
+            </div>
+            <div class="auth-buttons">
+              <button id="goto-create" class="btn btn-primary">Create an account</button>
+              <button id="goto-signin" class="btn btn-secondary">Sign In</button>
+            </div>
+            <p class="auth-demo-link">Want to look around first? <a id="try-demo">Try the Demo</a></p>
+          </div>
+          <p class="swipe-hint">— SWIPE TO EXPLORE —</p>
+          <div class="feature-cards-preview" id="feature-cards-preview">
+            <div class="feature-card-mini">
+              <div class="feature-mini-icon">📸</div>
+              <div class="feature-mini-title">Snap a Recipe</div>
+              <p class="feature-mini-text">Take a photo of any handwritten or printed recipe — our AI reads it instantly.</p>
+            </div>
+            <div class="feature-card-mini">
+              <div class="feature-mini-icon">👵🏻</div>
+              <div class="feature-mini-title">Your Nonna</div>
+              <p class="feature-mini-text">A personalized guide who leads you through every step — in her own voice.</p>
+            </div>
+            <div class="feature-card-mini">
+              <div class="feature-mini-icon">🏠</div>
+              <div class="feature-mini-title">Family Vault</div>
+              <p class="feature-mini-text">Recipes and personas shared only with your chosen family members.</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /slides-track -->
+    </div><!-- /slides-wrapper -->
+
+    <div class="slide-dots" id="slide-dots">
+      <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <div class="slide-nav">
+      <button class="slide-skip" id="slide-skip-btn">Skip</button>
+      <button class="btn btn-primary" id="slide-next-btn">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SIGN IN
+  ══════════════════════════════════════════════ -->
+  <div id="screen-signin" class="screen">
+    <div class="auth-screen-wrap">
+      <div class="auth-top-bar">
+        <button class="auth-back-btn" onclick="App.navigate('intro')">‹</button>
+        <div class="auth-mini-logo"><span>❤️</span> MyNonna</div>
+      </div>
+      <div class="auth-card">
+        <h2>Welcome back!<br>Sign in to your kitchen.</h2>
+        <p class="auth-sub">We missed you, amore.</p>
+        <div class="input-group">
+          <span class="input-icon">✉️</span>
+          <input id="signin-email" class="input-field" type="email" placeholder="Email address" autocomplete="email" />
+        </div>
+        <div class="input-group">
+          <span class="input-icon">🔒</span>
+          <input id="signin-password" class="input-field" type="password" placeholder="Password" autocomplete="current-password" />
+          <button class="input-toggle" id="toggle-signin-pw" type="button">👁️</button>
+        </div>
+        <div class="forgot-link"><a href="#" id="forgot-pw-link">Forgot password?</a></div>
+        <button class="btn btn-primary" id="signin-submit-btn">Sign In</button>
+        <p class="auth-alt">New here? <a id="switch-to-create">Create an account</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       CREATE ACCOUNT — STEP 1: Name
+  ══════════════════════════════════════════════ -->
+  <div id="screen-create-1" class="screen">
+    <div class="auth-screen-wrap">
+      <div class="auth-top-bar">
+        <button class="auth-back-btn" onclick="App.navigate('intro')">‹</button>
+        <div class="auth-mini-logo"><span>❤️</span> MyNonna</div>
+      </div>
+      <div class="auth-card">
+        <div class="step-indicator">
+          <div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div>
+        </div>
+        <h2>What's your name?</h2>
+        <p class="auth-sub">Let's make it personal, just like Nonna would.</p>
+        <div class="input-group">
+          <span class="input-icon">👤</span>
+          <input id="create-name" class="input-field" type="text" placeholder="Your name" autocomplete="name" />
+        </div>
+        <button class="btn btn-primary mt-16" id="create-step1-next">Continue →</button>
+        <p class="auth-alt">Already have an account? <a id="switch-to-signin-from-create">Sign In</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       CREATE ACCOUNT — STEP 2: Email & Password
+  ══════════════════════════════════════════════ -->
+  <div id="screen-create-2" class="screen">
+    <div class="auth-screen-wrap">
+      <div class="auth-top-bar">
+        <button class="auth-back-btn" onclick="App.navigate('create-1')">‹</button>
+        <div class="auth-mini-logo"><span>❤️</span> MyNonna</div>
+      </div>
+      <div class="auth-card">
+        <div class="step-indicator">
+          <div class="step-dot done"></div><div class="step-dot active"></div><div class="step-dot"></div>
+        </div>
+        <h2>Set up your account</h2>
+        <p class="auth-sub">Your recipes are safe with us.</p>
+        <div class="input-group">
+          <span class="input-icon">✉️</span>
+          <input id="create-email" class="input-field" type="email" placeholder="Email address" autocomplete="email" />
+        </div>
+        <div class="input-group">
+          <span class="input-icon">🔒</span>
+          <input id="create-password" class="input-field" type="password" placeholder="Password (min 8 chars)" autocomplete="new-password" />
+          <button class="input-toggle" id="toggle-create-pw" type="button">👁️</button>
+        </div>
+        <div class="input-group">
+          <span class="input-icon">🔒</span>
+          <input id="create-password-confirm" class="input-field" type="password" placeholder="Confirm password" autocomplete="new-password" />
+        </div>
+        <button class="btn btn-primary mt-8" id="create-step2-next">Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       CREATE ACCOUNT — STEP 3: Username & Avatar
+  ══════════════════════════════════════════════ -->
+  <div id="screen-create-3" class="screen">
+    <div class="auth-screen-wrap">
+      <div class="auth-top-bar">
+        <button class="auth-back-btn" onclick="App.navigate('create-2')">‹</button>
+        <div class="auth-mini-logo"><span>❤️</span> MyNonna</div>
+      </div>
+      <div class="auth-card">
+        <div class="step-indicator">
+          <div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot active"></div>
+        </div>
+        <h2>Make it yours!</h2>
+        <p class="auth-sub">Choose a username and your kitchen profile photo.</p>
+        <div class="avatar-picker">
+          <div class="avatar-preview" id="avatar-preview-create">🧑‍🍳</div>
+          <span class="avatar-upload-hint" id="avatar-upload-trigger">Upload a photo</span>
+          <input id="avatar-file-input" type="file" accept="image/*" class="hidden" />
+        </div>
+        <div class="input-group">
+          <span class="input-icon">@</span>
+          <input id="create-username" class="input-field" type="text" placeholder="Username (letters & numbers)" autocomplete="username" />
+        </div>
+        <button class="btn btn-primary mt-8" id="create-step3-submit">Create My Kitchen 🍝</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       MAIN APP
+  ══════════════════════════════════════════════ -->
+  <div id="screen-app" class="screen">
+
+    <!-- Header -->
+    <div id="app-header">
+      <div class="header-logo">
+        <div class="heart-icon">❤️</div>
+        MyNonna
+      </div>
+      <button class="avatar-btn" id="profile-avatar-btn" onclick="App.switchTab('settings')">🧑‍🍳</button>
+    </div>
+
+    <!-- Tab Content -->
+    <div id="tabs-content">
+
+      <!-- ────────── HOME TAB ────────── -->
+      <div id="tab-home" class="tab-pane active scroll-content">
+        <div class="home-greeting">
+          <h1 id="home-greeting-text">Good evening! 👋</h1>
+          <p>What are we cooking today?</p>
+        </div>
+        <div class="quick-stats">
+          <div class="stat-card">
+            <div class="stat-number" id="stat-recipes">0</div>
+            <div class="stat-label">Recipes</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-personas">0</div>
+            <div class="stat-label">Nonnas</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-family">0</div>
+            <div class="stat-label">Family</div>
+          </div>
+        </div>
+        <div class="recent-section">
+          <h3>Recent Recipes</h3>
+          <div id="recent-recipes-list">
+            <div class="empty-state">
+              <div class="empty-icon">🍽️</div>
+              <div class="empty-title">No recipes yet</div>
+              <p class="text-muted" style="font-size:13px;">Head to Cook to add your first recipe!</p>
+            </div>
+          </div>
+        </div>
+        <div style="height: 20px;"></div>
+      </div>
+
+      <!-- ────────── VAULT TAB ────────── -->
+      <div id="tab-vault" class="tab-pane" style="flex-direction:column;">
+        <div class="page-header">
+          <h1 class="page-title">Vault</h1>
+          <p class="page-subtitle">Your family's recipes &amp; Nonnas.</p>
+        </div>
+        <div class="vault-tabs">
+          <button class="vault-tab-btn active" id="vault-tab-recipes" onclick="Vault.showTab('recipes')">Recipes</button>
+          <button class="vault-tab-btn" id="vault-tab-personas" onclick="Vault.showTab('personas')">Nonnas</button>
+        </div>
+        <div id="vault-recipes-pane" class="scroll-content">
+          <div id="vault-recipes-grid" class="vault-grid"></div>
+          <div id="vault-recipes-empty" class="empty-state hidden">
+            <div class="empty-icon">📦</div>
+            <div class="empty-title">Vault is empty</div>
+            <p class="text-muted" style="font-size:13px;">Recipes save here after you finish cooking!</p>
+          </div>
+        </div>
+        <div id="vault-personas-pane" class="scroll-content hidden">
+          <div id="vault-personas-grid" class="vault-grid"></div>
+          <div id="vault-personas-empty" class="empty-state hidden">
+            <div class="empty-icon">👵🏻</div>
+            <div class="empty-title">No Nonnas yet</div>
+            <p class="text-muted" style="font-size:13px;">Create your first Nonna in Cook mode!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ────────── COOK TAB ────────── -->
+      <div id="tab-cook" class="tab-pane" style="flex-direction:column; position:relative;">
+
+        <!-- Cook: Add Recipe View -->
+        <div id="cook-add-recipe" class="cook-view active">
+          <div class="page-header">
+            <h1 class="page-title">Add Recipe</h1>
+            <p class="page-subtitle">Digitize a recipe to start cooking with MyNonna.</p>
+          </div>
+          <div class="upload-options">
+            <div class="upload-card card-tap" id="upload-file-card">
+              <div class="upload-icon-wrap">⬆️</div>
+              <h3>Upload File</h3>
+              <p>Select an image from your device</p>
+              <input id="recipe-file-input" type="file" accept="image/*" class="hidden" />
+            </div>
+            <div class="upload-card card-tap" id="camera-card">
+              <div class="upload-icon-wrap">📷</div>
+              <h3>Picture a written one</h3>
+              <p>Snap a photo of your recipe card</p>
+            </div>
+            <div class="upload-card upload-card-sm card-tap" id="demo-recipe-card">
+              <div class="upload-icon-wrap">⬆️</div>
+              <div>
+                <h3>Use demo recipe</h3>
+                <p style="font-size:12px; margin-top:2px;">Try with Nonna's Spaghetti</p>
+              </div>
+            </div>
+          </div>
+          <div id="cook-scanning-overlay" class="loading-overlay hidden" style="position:absolute;">
+            <div class="loading-spinner-lg"></div>
+            <p class="loading-text">Reading your recipe ✨</p>
+          </div>
+        </div>
+
+        <!-- Cook: Recipe Preview -->
+        <div id="cook-recipe-preview" class="cook-view">
+          <div class="page-header" style="display:flex; align-items:center; gap:12px;">
+            <button class="auth-back-btn" style="position:static; box-shadow:none;" onclick="Cook.showView('add-recipe')">‹</button>
+            <div>
+              <h1 class="page-title" style="font-size:1.5rem;">Recipe Preview</h1>
+              <p class="page-subtitle">Looks good? Let's cook!</p>
+            </div>
+          </div>
+          <div class="recipe-preview">
+            <div class="recipe-preview-header">
+              <div class="recipe-preview-title font-serif" id="preview-title">Recipe Title</div>
+              <div class="recipe-preview-meta" id="preview-meta"></div>
+            </div>
+            <div class="recipe-section">
+              <h4>Ingredients</h4>
+              <div id="preview-ingredients"></div>
+            </div>
+            <div class="recipe-section">
+              <h4>Steps</h4>
+              <div id="preview-steps"></div>
+            </div>
+          </div>
+          <div class="preview-actions">
+            <button class="btn btn-primary" id="start-cooking-btn">Start Cooking 🍳</button>
+            <button class="btn btn-secondary" onclick="Cook.showView('add-recipe')">Try different recipe</button>
+          </div>
+        </div>
+
+        <!-- Cook: Choose Persona -->
+        <div id="cook-persona-select" class="cook-view">
+          <div class="page-header" style="display:flex; align-items:center; gap:12px;">
+            <button class="auth-back-btn" style="position:static; box-shadow:none;" onclick="Cook.showView('recipe-preview')">‹</button>
+            <div>
+              <h1 class="page-title" style="font-size:1.5rem;">Choose Your Nonna</h1>
+              <p class="page-subtitle">Who's guiding you today?</p>
+            </div>
+          </div>
+          <div class="persona-grid" id="persona-select-grid"></div>
+          <div style="padding: 0 20px 20px;">
+            <button class="btn btn-primary" id="begin-cook-btn" disabled>Begin Cooking →</button>
+          </div>
+        </div>
+
+        <!-- Cook: Active Session -->
+        <div id="cook-session-view" class="cook-view">
+          <div class="session-header">
+            <div class="session-persona-img" id="session-persona-img">👵🏻</div>
+            <div>
+              <div class="session-persona-name" id="session-persona-name">Nonna</div>
+              <div class="session-persona-subtitle" id="session-recipe-title">Recipe</div>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="width:auto; margin-left:auto;" onclick="Cook.endSession()">End</button>
+          </div>
+          <div class="step-progress-bar"><div class="step-progress-fill" id="step-progress-fill" style="width:0%"></div></div>
+          <div class="session-content scroll-content">
+            <div class="step-counter" id="step-counter">Step 1 of 8</div>
+            <div class="step-text font-serif" id="step-text"></div>
+            <div id="persona-response-bubble" class="persona-bubble hidden">
+              <div class="bubble-avatar" id="session-bubble-avatar">👵🏻</div>
+              <div class="bubble-text" id="persona-response-text"></div>
+            </div>
+            <div class="qa-section">
+              <p class="section-label mb-8">Ask Nonna a question</p>
+              <div class="qa-input-row">
+                <div class="input-group qa-input" style="margin-bottom:0;">
+                  <input id="qa-input-field" class="input-field no-icon" type="text" placeholder="What if I don't have...?" />
+                </div>
+                <button class="mic-btn" id="mic-btn" title="Speak your question">🎤</button>
+              </div>
+            </div>
+            <div id="audio-indicator" class="audio-indicator hidden mt-12">
+              <div class="audio-bars"><div class="audio-bar"></div><div class="audio-bar"></div><div class="audio-bar"></div></div>
+              Nonna is speaking...
+            </div>
+          </div>
+          <div class="session-footer">
+            <button class="btn btn-secondary" id="prev-step-btn" style="flex:1;" disabled>← Prev</button>
+            <button class="btn btn-primary" id="next-step-btn" style="flex:2;">Next Step →</button>
+          </div>
+        </div>
+
+        <!-- Cook: Complete -->
+        <div id="cook-complete-view" class="cook-view">
+          <div class="cook-complete-content">
+            <div class="complete-emoji">🎉</div>
+            <h1 class="complete-title">Buon Appetito!</h1>
+            <p class="complete-sub">You did it, amore! The recipe has been saved to your Vault.</p>
+            <div style="width:100%; display:flex; flex-direction:column; gap:12px;">
+              <button class="btn btn-primary" onclick="App.switchTab('vault')">View in Vault</button>
+              <button class="btn btn-secondary" onclick="Cook.showView('add-recipe')">Cook another recipe</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /tab-cook -->
+
+      <!-- ────────── FAMILY TAB ────────── -->
+      <div id="tab-family" class="tab-pane" style="flex-direction:column;">
+        <div class="page-header" style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div>
+            <h1 class="page-title">Family</h1>
+            <p class="page-subtitle" id="family-member-count">· 0 members</p>
+          </div>
+          <button class="btn btn-primary btn-sm" style="width:auto;" id="invite-family-btn">+ Add Member</button>
+        </div>
+        <div class="family-stats">
+          <div class="family-stat-card">
+            <div class="family-stat-num" id="fam-stat-members">0</div>
+            <div class="family-stat-label">Members</div>
+          </div>
+          <div class="family-stat-card">
+            <div class="family-stat-num" id="fam-stat-active">0</div>
+            <div class="family-stat-label">Active</div>
+          </div>
+        </div>
+        <div class="family-members-list scroll-content" id="family-members-list"></div>
+        <div class="chat-section">
+          <h3 class="mb-8">Family Chat</h3>
+          <div class="chat-messages" id="chat-messages"></div>
+          <div class="chat-input-row">
+            <div class="input-group chat-input" style="margin-bottom:0;">
+              <input id="chat-input-field" class="input-field no-icon" type="text" placeholder="Send a message..." />
+            </div>
+            <button class="chat-send-btn" id="chat-send-btn">➤</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ────────── SETTINGS TAB ────────── -->
+      <div id="tab-settings" class="tab-pane scroll-content">
+        <div class="page-header">
+          <h1 class="page-title">Settings</h1>
+          <p class="text-muted" style="font-size:14px;">Manage your kitchen &amp; account.</p>
+        </div>
+        <div class="settings-list">
+          <div class="settings-row card-tap" onclick="Settings.openSubscription()">
+            <div class="settings-row-icon">💳</div>
+            <div class="settings-row-label">Subscription</div>
+            <div class="settings-row-arrow">›</div>
+          </div>
+          <div class="settings-row card-tap" onclick="App.switchTab('family')">
+            <div class="settings-row-icon">👨‍👩‍👧</div>
+            <div class="settings-row-label">Family Members</div>
+            <div class="settings-row-arrow">›</div>
+          </div>
+          <div class="settings-row card-tap" onclick="Settings.openNotifications()">
+            <div class="settings-row-icon">🔔</div>
+            <div class="settings-row-label">Notifications</div>
+            <div class="settings-row-arrow">›</div>
+          </div>
+          <div class="settings-row card-tap" onclick="Settings.openPrivacy()">
+            <div class="settings-row-icon">🛡️</div>
+            <div class="settings-row-label">Privacy &amp; Security</div>
+            <div class="settings-row-arrow">›</div>
+          </div>
+          <div class="settings-row settings-signout card-tap" id="signout-btn">
+            <div class="settings-row-icon" style="background:var(--gray-light);">↪️</div>
+            <div class="settings-row-label">Sign Out</div>
+          </div>
+          <div class="settings-row settings-delete card-tap" id="delete-account-btn">
+            <div class="settings-row-icon" style="background:#FFE8E8;">🗑️</div>
+            <div class="settings-row-label">Delete Account</div>
+          </div>
+        </div>
+        <div class="settings-footer">MyNonna v1.0 · Made with ❤️</div>
+      </div>
+
+    </div><!-- /tabs-content -->
+
+    <!-- Bottom Nav -->
+    <nav id="bottom-nav">
+      <button class="nav-item active" data-tab="home" id="nav-home">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">Home</span>
+      </button>
+      <button class="nav-item" data-tab="vault" id="nav-vault">
+        <span class="nav-icon">📦</span>
+        <span class="nav-label">Vault</span>
+      </button>
+      <button class="nav-item" data-tab="cook" id="nav-cook">
+        <span class="nav-icon">👨‍🍳</span>
+        <span class="nav-label">Cook</span>
+      </button>
+      <button class="nav-item" data-tab="family" id="nav-family">
+        <span class="nav-icon">👨‍👩‍👧</span>
+        <span class="nav-label">Family</span>
+      </button>
+    </nav>
+  </div><!-- /screen-app -->
+
+  <!-- ══════════════════════════════════════════════
+       CAMERA MODAL
+  ══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="camera-modal">
+    <div class="modal-sheet" style="max-width:430px; margin:0 auto;">
+      <div class="modal-handle"></div>
+      <h3 class="modal-title">📷 Snap your recipe</h3>
+      <video id="camera-video" autoplay playsinline muted></video>
+      <div style="display:flex; gap:10px; margin-top:14px;">
+        <button class="btn btn-secondary" id="camera-cancel-btn" style="flex:1;">Cancel</button>
+        <button class="btn btn-primary" id="camera-capture-btn" style="flex:1;">📸 Capture</button>
+      </div>
+      <canvas id="camera-canvas" class="hidden"></canvas>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       CREATE PERSONA MODAL
+  ══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="persona-modal">
+    <div class="modal-sheet" style="max-width:430px; margin:0 auto;">
+      <div class="modal-handle"></div>
+      <h3 class="modal-title">Create Your Nonna 👵🏻</h3>
+      <div class="avatar-picker">
+        <div class="avatar-preview" id="persona-avatar-preview">👵🏻</div>
+        <span class="avatar-upload-hint" id="persona-avatar-upload-trigger">Upload a photo</span>
+        <input id="persona-image-input" type="file" accept="image/*" class="hidden" />
+      </div>
+      <div class="input-group">
+        <span class="input-icon">👤</span>
+        <input id="persona-name-input" class="input-field" type="text" placeholder="Nonna's name (e.g. Nonna Rosa)" />
+      </div>
+      <div class="input-group">
+        <textarea id="persona-desc-input" class="input-field no-icon" placeholder="Describe her personality — e.g. 'Warm, funny, from Naples. Loves garlic. Always says Mangia!'" rows="3"></textarea>
+      </div>
+      <div style="display:flex; gap:10px; margin-top:8px;">
+        <button class="btn btn-secondary" id="persona-modal-cancel" style="flex:1;">Cancel</button>
+        <button class="btn btn-primary" id="persona-modal-save" style="flex:2;">Create Nonna ✨</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       INVITE FAMILY MODAL
+  ══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="invite-modal">
+    <div class="modal-sheet" style="max-width:430px; margin:0 auto;">
+      <div class="modal-handle"></div>
+      <h3 class="modal-title">Add a Family Member 👨‍👩‍👧</h3>
+      <p class="text-muted mb-16" style="font-size:14px;">Enter their email to invite them. If they have an account, they'll be added right away!</p>
+      <div class="input-group">
+        <span class="input-icon">✉️</span>
+        <input id="invite-email-input" class="input-field" type="email" placeholder="family@example.com" />
+      </div>
+      <div style="display:flex; gap:10px; margin-top:8px;">
+        <button class="btn btn-secondary" id="invite-modal-cancel" style="flex:1;">Cancel</button>
+        <button class="btn btn-primary" id="invite-modal-send" style="flex:2;">Send Invite 💌</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-container"></div>
+  <audio id="tts-audio"></audio>
+
+</div><!-- /app-wrapper -->
+
+<!-- Scripts (order matters) -->
+<script src="/js/app.js"></script>
+<script src="/js/intro.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/home.js"></script>
+<script src="/js/vault.js"></script>
+<script src="/js/cook.js"></script>
+<script src="/js/family.js"></script>
+<script src="/js/settings.js"></script>
+
+</body>
+</html>
