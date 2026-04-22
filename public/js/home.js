@@ -46,7 +46,7 @@ const Home = (function() {
     if (!recipes.length) {
       list.innerHTML = `
         <div class="empty-state">
-          <div class="empty-icon">🍽️</div>
+          <div class="empty-icon"></div>
           <div class="empty-title">No recipes yet</div>
           <p class="text-muted" style="font-size:13px;">Head to Cook to add your first recipe!</p>
         </div>`;
@@ -54,7 +54,7 @@ const Home = (function() {
     }
     list.innerHTML = recipes.map(r => `
       <div class="recipe-card-row card-tap" onclick="App.switchTab('vault')">
-        <div class="recipe-thumb">${r.imageUrl ? `<img src="${r.imageUrl}" />` : '🍝'}</div>
+        <div class="recipe-thumb">${r.imageUrl ? `<img src="${r.imageUrl}" />` : ''}</div>
         <div class="recipe-info">
           <div class="recipe-name">${r.title}</div>
           <div class="recipe-meta">${r.prepTime || ''} ${r.servings ? '· ' + r.servings + ' servings' : ''}</div>

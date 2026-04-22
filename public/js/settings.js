@@ -10,7 +10,7 @@ const Settings = (function() {
     App.setDemoMode(false);
     localStorage.removeItem('mn_intro_seen');
     App.navigate('intro');
-    App.toast('Signed out. A presto! 👋');
+    App.toast('Signed out. A presto! ');
   }
 
   async function deleteAccount() {
@@ -22,14 +22,14 @@ const Settings = (function() {
       const res = await fetch('/api/auth/delete', { method: 'DELETE' });
       if (!res.ok) throw new Error('Delete failed');
       App.navigate('intro');
-      App.toast('Account deleted. Arrivederci 💔');
+      App.toast('Account deleted. Arrivederci ');
     } catch (err) {
       App.toast('Could not delete account: ' + err.message, 'error');
     }
   }
 
   function openSubscription() {
-    App.toast('Subscription plans coming soon! 🌟');
+    App.toast('Subscription plans coming soon! ');
   }
 
   function openNotifications() {

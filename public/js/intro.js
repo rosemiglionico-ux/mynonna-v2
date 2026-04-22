@@ -9,7 +9,6 @@ const Intro = (function() {
     current = index;
     const track = document.getElementById('slides-track');
     if (track) track.style.transform = `translateX(-${current * 100}%)`;
-    updateDots();
     updateButtons();
   }
 
@@ -26,14 +25,24 @@ const Intro = (function() {
   function updateButtons() {
     const nextBtn = document.getElementById('slide-next-btn');
     const skipBtn = document.getElementById('slide-skip-btn');
+    const backBtn = document.getElementById('slide-back-btn');
     if (!nextBtn) return;
     if (current === total - 1) {
-      // Last slide = auth landing, hide nav
+      // Last slide = auth landing, hide all nav
       nextBtn.classList.add('hidden');
       skipBtn.classList.add('hidden');
+      backBtn.classList.remove('hidden');
+      backBtn.style.margin = '0 auto';
     } else {
       nextBtn.classList.remove('hidden');
       skipBtn.classList.remove('hidden');
+      backBtn.style.margin = '';
+      // Hide Back on first slide
+      if (current === 0) {
+        backBtn.classList.add('hidden');
+      } else {
+        backBtn.classList.remove('hidden');
+      }
       nextBtn.textContent = current === total - 2 ? 'Get Started →' : 'Next →';
     }
   }
@@ -49,6 +58,8 @@ const Intro = (function() {
       goTo(total - 1);
       localStorage.setItem('mn_intro_seen', '1');
     });
+    const backBtn = document.getElementById('slide-back-btn');
+    if (backBtn) backBtn.addEventListener('click', () => goTo(current - 1));
 
     // Auth landing buttons
     document.getElementById('goto-create')?.addEventListener('click', () => {
@@ -64,7 +75,7 @@ const Intro = (function() {
       App.setDemoMode(true);
       App.setUser({ name: 'Demo User', username: 'demo', avatar: null, familyId: null });
       App.showApp();
-      App.toast('Demo mode — some features are limited 👀');
+      App.toast('Demo mode — some features are limited ');
     });
 
     // Touch swipe support for slides

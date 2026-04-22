@@ -9,7 +9,7 @@ const Auth = (function() {
     if (!input || !btn) return;
     btn.addEventListener('click', () => {
       input.type = input.type === 'password' ? 'text' : 'password';
-      btn.textContent = input.type === 'password' ? '👁️' : '🙈';
+      btn.textContent = input.type === 'password' ? 'Show' : 'Hide';
     });
   }
 
@@ -28,7 +28,7 @@ const Auth = (function() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Login failed');
       App.setUser(data.user);
-      App.toast('Welcome back! 🍝', 'success');
+      App.toast('Welcome back! ', 'success');
       App.showApp();
     } catch (err) {
       App.toast(err.message, 'error');
@@ -91,12 +91,12 @@ const Auth = (function() {
       }
 
       App.setUser(regData.user);
-      App.toast(`Welcome, ${pending.name}! 🎉`, 'success');
+      App.toast(`Welcome, ${pending.name}! `, 'success');
       App.showApp();
     } catch (err) {
       App.toast(err.message, 'error');
     } finally {
-      btn.textContent = 'Create My Kitchen 🍝';
+      btn.textContent = 'Create My Kitchen ';
       btn.disabled = false;
     }
   }

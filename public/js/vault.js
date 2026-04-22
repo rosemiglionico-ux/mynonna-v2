@@ -31,7 +31,7 @@ const Vault = (function() {
     empty?.classList.add('hidden');
     grid.innerHTML = recipes.map(r => `
       <div class="vault-card card-tap">
-        <div class="vault-card-thumb">${r.imageUrl ? `<img src="${r.imageUrl}" />` : '🍝'}</div>
+        <div class="vault-card-thumb">${r.imageUrl ? `<img src="${r.imageUrl}" />` : ''}</div>
         <div class="vault-card-body">
           <div class="vault-card-title">${r.title}</div>
           <div class="vault-card-meta">${r.prepTime || ''}</div>
@@ -47,7 +47,7 @@ const Vault = (function() {
     empty?.classList.add('hidden');
     grid.innerHTML = personas.map(p => `
       <div class="vault-card card-tap">
-        <div class="vault-card-thumb">${p.imageUrl ? `<img src="${p.imageUrl}" />` : '👵🏻'}</div>
+        <div class="vault-card-thumb">${p.imageUrl ? `<img src="${p.imageUrl}" />` : ''}</div>
         <div class="vault-card-body">
           <div class="vault-card-title">${p.name}</div>
           <div class="vault-card-meta">${(p.description || '').slice(0, 40)}...</div>

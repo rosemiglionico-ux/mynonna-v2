@@ -18,20 +18,20 @@ const Family = (function() {
 
       document.getElementById('fam-stat-members').textContent = members.length;
       document.getElementById('fam-stat-active').textContent  = members.length; // simplified
-      document.getElementById('family-member-count').textContent = `· ${members.length} member${members.length !== 1 ? 's' : ''}`;
+      document.getElementById('family-member-count').textContent = `${members.length} member${members.length !== 1 ? 's' : ''}`;
 
       const list = document.getElementById('family-members-list');
       const user = App.getUser();
       if (!list) return;
 
       if (!members.length) {
-        list.innerHTML = `<div class="empty-state"><div class="empty-icon">👨‍👩‍👧</div><div class="empty-title">No family members yet</div><p class="text-muted" style="font-size:13px;">Use '+ Add Member' to invite your family!</p></div>`;
+        list.innerHTML = `<div class="empty-state"><div class="empty-icon"></div><div class="empty-title">No family members yet</div><p class="text-muted" style="font-size:13px;">Use '+ Add Member' to invite your family!</p></div>`;
         return;
       }
 
       list.innerHTML = members.map(m => `
         <div class="member-item">
-          <div class="member-avatar">${m.avatar ? `<img src="${m.avatar}" />` : (m.name?.[0]?.toUpperCase() || '👤')}</div>
+          <div class="member-avatar">${m.avatar ? `<img src="${m.avatar}" />` : (m.name?.[0]?.toUpperCase() || '')}</div>
           <div class="member-info">
             <div class="member-name">${m.name}</div>
             <div class="member-username">@${m.username || 'member'}</div>
@@ -120,13 +120,13 @@ const Family = (function() {
       const res  = await fetch('/api/family/invite', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
-      App.toast(data.message || 'Invite sent! 💌', 'success');
+      App.toast(data.message || 'Invite sent! ', 'success');
       closeInviteModal();
       await loadMembers();
     } catch (err) {
       App.toast(err.message, 'error');
     } finally {
-      btn.textContent = 'Send Invite 💌';
+      btn.textContent = 'Send Invite ';
       btn.disabled = false;
     }
   }

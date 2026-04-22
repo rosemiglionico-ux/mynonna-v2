@@ -138,7 +138,8 @@ textarea.input-field { padding: 14px 16px; resize: none; min-height: 100px; }
   border-bottom: 1px solid rgba(44,26,14,0.06);
 }
 .header-logo { display: flex; align-items: center; gap: 8px; font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--brown); }
-.header-logo .heart-icon { width: 32px; height: 32px; background: var(--white); border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.header-logo .heart-icon { width: 32px; height: 32px; background: var(--white); border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); color: var(--orange); }
+.header-logo .heart-icon svg { color: var(--orange); fill: var(--orange); }
 .avatar-btn { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--orange-pale); overflow: hidden; cursor: pointer; background: var(--cream-dark); display: flex; align-items: center; justify-content: center; font-size: 18px; }
 .avatar-btn img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -158,7 +159,8 @@ textarea.input-field { padding: 14px 16px; resize: none; min-height: 100px; }
   background: none; border: none; font-family: 'Inter', sans-serif;
   transition: color 0.2s;
 }
-.nav-item .nav-icon { font-size: 22px; line-height: 1; }
+.nav-item .nav-icon { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+.nav-item .nav-icon svg { width: 24px; height: 24px; }
 .nav-item .nav-label { font-size: 11px; font-weight: 500; }
 .nav-item { color: var(--brown-light); }
 .nav-item.active { color: var(--orange); }
@@ -196,10 +198,14 @@ textarea.input-field { padding: 14px 16px; resize: none; min-height: 100px; }
   align-items: center; justify-content: center;
   padding: 40px 28px; text-align: center;
 }
-.slide-emoji {
-  font-size: 72px; margin-bottom: 24px;
+.slide-icon {
+  width: 100px; height: 100px; margin-bottom: 24px;
   animation: floatBob 3s ease-in-out infinite;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--orange-pale); border-radius: 28px;
+  color: var(--orange);
 }
+.slide-icon svg { width: 56px; height: 56px; }
 .slide-title { font-size: 2rem; font-weight: 700; color: var(--brown); margin-bottom: 14px; line-height: 1.2; }
 .slide-text { font-size: 16px; color: var(--brown-light); line-height: 1.6; max-width: 300px; }
 
@@ -226,22 +232,17 @@ textarea.input-field { padding: 14px 16px; resize: none; min-height: 100px; }
 }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* Slide dots */
-.slide-dots {
-  display: flex; gap: 8px; justify-content: center; padding: 16px 0 12px;
-}
-.dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--gray-mid); transition: all 0.3s;
-}
-.dot.active { width: 24px; border-radius: 4px; background: var(--orange); }
+/* Slide dots — hidden, replaced by Back/Next navigation */
+.slide-dots { display: none; }
 
 /* Slide nav buttons */
 .slide-nav {
   padding: 12px 24px 28px;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
 }
 .slide-skip { background: none; border: none; color: var(--brown-light); font-size: 14px; cursor: pointer; font-family: 'Inter', sans-serif; }
+.slide-back { background: none; border: none; color: var(--brown-light); font-size: 14px; cursor: pointer; font-family: 'Inter', sans-serif; padding: 0; }
+.slide-back:hover { color: var(--brown); }
 #slide-next-btn { width: auto; min-width: 120px; }
 
 /* ── Auth Landing Slide ─────────────────────────── */
@@ -250,7 +251,8 @@ textarea.input-field { padding: 14px 16px; resize: none; min-height: 100px; }
 .auth-hero-text { font-size: 1.1rem; color: var(--brown-light); line-height: 1.55; margin-bottom: 24px; }
 .auth-hero-text span { color: var(--orange); font-weight: 600; font-family: 'Playfair Display', serif; }
 .auth-logo { display: flex; align-items: center; justify-content: center; gap: 12px; font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--brown); margin-bottom: 28px; }
-.auth-logo-icon { width: 48px; height: 48px; background: var(--white); border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.auth-logo-icon { width: 48px; height: 48px; background: var(--white); border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center; color: var(--orange); font-size: 24px; }
+.auth-logo-icon svg { fill: var(--orange); }
 .auth-buttons { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
 .auth-demo-link { text-align: center; font-size: 14px; color: var(--brown-light); }
 .auth-demo-link a { color: var(--orange); font-weight: 600; text-decoration: none; cursor: pointer; }
@@ -276,6 +278,8 @@ textarea.input-field { padding: 14px 16px; resize: none; min-height: 100px; }
 }
 .auth-back-btn { position: absolute; left: 16px; background: var(--white); border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--card-shadow); font-size: 18px; color: var(--brown); }
 .auth-mini-logo { display: flex; align-items: center; gap: 8px; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; color: var(--brown); }
+.auth-mini-logo span { color: var(--orange); display: flex; align-items: center; }
+.auth-mini-logo span svg { fill: var(--orange); }
 .auth-card {
   margin: 12px 16px 24px; background: var(--white);
   border-radius: var(--radius-lg); padding: 28px 24px;
@@ -412,7 +416,8 @@ textarea.input-field { padding: 14px 16px; resize: none; min-height: 100px; }
 
 /* Cook Complete */
 .cook-complete-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; text-align: center; }
-.complete-emoji { font-size: 80px; margin-bottom: 20px; animation: bounceIn 0.6s ease; }
+.complete-emoji, .complete-icon { width: 100px; height: 100px; margin-bottom: 20px; animation: bounceIn 0.6s ease; display: flex; align-items: center; justify-content: center; background: var(--orange-pale); border-radius: 28px; }
+.complete-icon svg { width: 64px; height: 64px; }
 .complete-title { font-size: 2rem; margin-bottom: 10px; }
 .complete-sub { color: var(--brown-light); font-size: 15px; line-height: 1.6; margin-bottom: 32px; }
 

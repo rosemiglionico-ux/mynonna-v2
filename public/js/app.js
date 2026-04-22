@@ -47,7 +47,7 @@ const App = (function() {
     if (state.user?.avatar) {
       btn.innerHTML = `<img src="${state.user.avatar}" alt="avatar" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`;
     } else {
-      btn.textContent = state.user?.name?.[0]?.toUpperCase() || '🧑‍🍳';
+      btn.textContent = state.user?.name?.[0]?.toUpperCase() || '';
     }
   }
 
@@ -57,7 +57,7 @@ const App = (function() {
     const h = new Date().getHours();
     const part = h < 12 ? 'morning' : h < 17 ? 'afternoon' : 'evening';
     const name = state.user?.name?.split(' ')[0] || 'Chef';
-    el.textContent = `Good ${part}, ${name}! 👋`;
+    el.textContent = `Good ${part}, ${name}! `;
   }
 
   function showApp() {

@@ -106,7 +106,7 @@ const Cook = (function() {
     const grid = document.getElementById('persona-select-grid');
     grid.innerHTML = personas.map(p => `
       <div class="persona-card card-tap" data-id="${p._id}" onclick="Cook.selectPersona('${p._id}', this)">
-        <div class="persona-photo">${p.imageUrl ? `<img src="${p.imageUrl}" />` : '👵🏻'}</div>
+        <div class="persona-photo">${p.imageUrl ? `<img src="${p.imageUrl}" />` : ''}</div>
         <div class="persona-name">${p.name}</div>
         <div class="persona-desc">${p.description || ''}</div>
       </div>`).join('') + `
@@ -151,7 +151,7 @@ const Cook = (function() {
     document.getElementById('persona-modal').classList.add('open');
     document.getElementById('persona-name-input').value = '';
     document.getElementById('persona-desc-input').value = '';
-    document.getElementById('persona-avatar-preview').innerHTML = '👵🏻';
+    document.getElementById('persona-avatar-preview').innerHTML = '';
     personaImageData = null;
   }
 
@@ -188,13 +188,13 @@ const Cook = (function() {
       const res  = await fetch('/api/personas', { method: 'POST', body: fd });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
-      App.toast(`${name} is ready! 👵🏻`, 'success');
+      App.toast(`${name} is ready! `, 'success');
       closePersonaModal();
       loadPersonaSelect();
     } catch (err) {
       App.toast(err.message, 'error');
     } finally {
-      btn.textContent = 'Create Nonna ✨';
+      btn.textContent = 'Create Nonna ';
       btn.disabled = false;
     }
   }
@@ -219,17 +219,17 @@ const Cook = (function() {
     document.getElementById('session-recipe-title').textContent   = currentRecipe.title || 'Recipe';
     document.getElementById('step-progress-fill').style.width     = `${((currentStep + 1) / total) * 100}%`;
     document.getElementById('prev-step-btn').disabled = currentStep === 0;
-    document.getElementById('next-step-btn').textContent = currentStep === total - 1 ? '🎉 Finish!' : 'Next Step →';
+    document.getElementById('next-step-btn').textContent = currentStep === total - 1 ? ' Finish!' : 'Next Step';
 
     // Persona image
     const imgEl = document.getElementById('session-persona-img');
     imgEl.innerHTML = currentPersona.imageUrl
       ? `<img src="${currentPersona.imageUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`
-      : '👵🏻';
+      : '';
     const bubbleAvatar = document.getElementById('session-bubble-avatar');
     bubbleAvatar.innerHTML = currentPersona.imageUrl
       ? `<img src="${currentPersona.imageUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`
-      : '👵🏻';
+      : '';
 
     document.getElementById('persona-response-bubble').classList.add('hidden');
     document.getElementById('qa-input-field').value = '';
