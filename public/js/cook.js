@@ -203,7 +203,7 @@ const Cook = (function() {
   function beginSession() {
     if (!currentPersona || !currentRecipe) return;
     currentStep = 0;
-    showView('cook-session-view');
+    showView('session-view');
     renderSession();
     speakStep();
   }
@@ -351,7 +351,7 @@ const Cook = (function() {
         console.warn('Could not save recipe:', err);
       }
     }
-    showView('cook-complete-view');
+    showView('complete-view');
   }
 
   function endSession() {
